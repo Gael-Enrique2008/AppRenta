@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestor de tareas</title>
+</head>
+<body>
+
+    <script>
+
+const id_usuario = localStorage.getItem("id_usuario");
+
+if(id_usuario){
+    window.location.href = "dashboard.html";
+}else{
+    window.location.href = "login.html";
+}
+
+    </script>
+
+</body>
+</html>

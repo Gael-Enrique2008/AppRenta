@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor de Tareas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="contenedor">
+
+        <h2>Mis tareas</h2>
+
+        <button onclick="cerrarSesion()">
+            Cerrar sesion
+        </button>
+
+        <input type="text"
+               id="titulo"
+               placeholder="Escribe una tarea...">
+
+        <button onclick="agregarTarea()">
+            Agregar tarea
+        </button>
+
+        <ul id="listaTareas"></ul>
+
+    </div>
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>
