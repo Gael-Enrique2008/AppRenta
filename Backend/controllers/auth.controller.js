@@ -8,7 +8,6 @@ exports.registro = async (req, res) => {
 
         const { nombre, correo, password, rol } = req.body;
 
-        // Verificar si el correo ya existe
         const usuarioExistente = await conexion.query(
             "SELECT * FROM usuarios WHERE correo = $1",
             [correo]
@@ -22,10 +21,8 @@ exports.registro = async (req, res) => {
 
         }
 
-        // Hashear contraseña
         const hash = await bcrypt.hash(password, 10);
 
-        // Insertar usuario
         await conexion.query(
 
             `INSERT INTO usuarios
