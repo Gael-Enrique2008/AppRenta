@@ -4,83 +4,133 @@ const jwt = require("jsonwebtoken");
 
 exports.registro = async (req, res) => {
 
-    const { correo, password } = req.body;
+    try {
 
-    const hash = await bcrypt.hash(password, 10);
+        const { nombre, correo, password, rol } = req.body;
 
-    const sql = "INSERT INTO usuarios(correo, password) VALUES (?, ?)";
+        // Verificar si el correo ya existe
+        const usuarioExistente = await conexion.query(
+            "SELECT * FROM usuarios WHERE correo = $1",
+            [correo]
+        );
 
-    conexion.query(sql, [correo, hash], (err, resultado) => {
+        if (usuarioExistente.rows.length > 0) {
 
-        if (err) {
-            console.log(err);
-            return res.status(500).json({
-                mensaje: "Error al registrar"
+            return res.status(400).json({
+                mensaje: "El correo ya está registrado"
             });
+
         }
+
+        // Hashear contraseña
+        const hash = await bcrypt.hash(password, 10);
+
+        // Insertar usuario
+        await conexion.query(
+
+            `INSERT INTO usuarios
+            (nombre, correo, password, rol)
+            VALUES ($1, $2, $3, $4)`,
+
+            [nombre, correo, hash, rol]
+
+        );
 
         res.json({
             mensaje: "Usuario registrado"
         });
 
-    });
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            mensaje: "Error al registrar usuario"
+        });
+
+    }
 
 };
 
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
 
-    const { correo, password } = req.body;
+    try {
 
-    const sql = "SELECT * FROM usuarios WHERE correo = ?";
+        const { correo, password } = req.body;
 
-    conexion.query(sql, [correo], async (err, resultado) => {
+        const resultado = await conexion.query(
 
-        if (err) {
-            return res.status(500).json(err);
-        }
+            "SELECT * FROM usuarios WHERE correo = $1",
 
-        if (resultado.length === 0) {
-            return res.json({
-                mensaje: "Usuario no encontrado"
-            });
-        }
+            [correo]
 
-        const valido = await bcrypt.compare(
-            password,
-            resultado[0].password
         );
 
-        if (valido) {
+        if (resultado.rows.length === 0) {
 
-            const token = jwt.sign(
-
-                {
-                    id: resultado[0].id,
-                    correo: resultado[0].correo
-                },
-
-                process.env.JWT_SECRET,
-
-                {
-                    expiresIn: "1h"
-                }
-
-            );
-
-            res.json({
-
-                mensaje: "Login correcto",
-                token: token
-
+            return res.status(404).json({
+                mensaje: "Usuario no encontrado"
             });
 
         }
-        else {
-            res.json({
+
+        const usuario = resultado.rows[0];
+
+        const valido = await bcrypt.compare(
+
+            password,
+
+            usuario.password
+
+        );
+
+        if (!valido) {
+
+            return res.status(401).json({
                 mensaje: "Contraseña incorrecta"
             });
+
         }
 
-    });
+        const token = jwt.sign(
+
+            {
+                id: usuario.id,
+                correo: usuario.correo,
+                rol: usuario.rol
+            },
+
+            process.env.JWT_SECRET,
+
+            {
+                expiresIn: "1h"
+            }
+
+        );
+
+        res.json({
+
+            mensaje: "Login correcto",
+
+            token,
+
+            usuario: {
+                id: usuario.id,
+                nombre: usuario.nombre,
+                correo: usuario.correo,
+                rol: usuario.rol
+            }
+
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            mensaje: "Error al iniciar sesión"
+        });
+
+    }
 
 };

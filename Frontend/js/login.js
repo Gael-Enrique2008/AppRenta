@@ -24,8 +24,15 @@ function login() {
             alert(data.mensaje);
 
             if (data.mensaje === "Login correcto") {
+
                 localStorage.setItem("token", data.token);
+                localStorage.setItem("nombre", data.usuario.nombre);
+                localStorage.setItem("correo", data.usuario.correo);
+                localStorage.setItem("rol", data.usuario.rol);
+                localStorage.setItem("id_usuario", data.usuario.id);
+
                 window.location.href = "dashboard.html";
+
             }
 
         });

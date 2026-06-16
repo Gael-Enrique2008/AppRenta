@@ -1,7 +1,9 @@
-function registrar(){
+function registrar() {
 
+    const nombre = document.getElementById("nombre").value;
     const correo = document.getElementById("correo").value;
     const password = document.getElementById("password").value;
+    const rol = document.getElementById("rol").value;
 
     fetch("http://localhost:3000/api/registro", {
 
@@ -12,14 +14,22 @@ function registrar(){
         },
 
         body: JSON.stringify({
+            nombre,
             correo,
-            password
+            password,
+            rol
         })
 
     })
-    .then(res => res.json())
-    .then(data => {
-        alert(data.mensaje);
-    });
+        .then(res => res.json())
+        .then(data => {
+
+            alert(data.mensaje);
+
+            if (data.mensaje === "Usuario registrado") {
+                window.location.href = "login.html";
+            }
+
+        });
 
 }

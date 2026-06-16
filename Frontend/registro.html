@@ -10,13 +10,37 @@
 
         <h2>Registro</h2>
 
-        <input type="email" id="correo" placeholder="Correo">
+        <input type="text"
+               id="nombre"
+               placeholder="Nombre completo">
 
-        <input type="password" id="password" placeholder="Password">
+        <input type="email"
+               id="correo"
+               placeholder="Correo">
 
-        <button onclick="registrar()">Registrarse</button>
+        <input type="password"
+               id="password"
+               placeholder="Contraseña">
 
-        <a href="login.html">Ir al login</a>
+        <select id="rol">
+
+            <option value="arrendatario">
+                Arrendatario
+            </option>
+
+            <option value="propietario">
+                Propietario
+            </option>
+
+        </select>
+
+        <button onclick="registrar()">
+            Registrarse
+        </button>
+
+        <a href="login.html">
+            Ir al login
+        </a>
 
     </div>
 
