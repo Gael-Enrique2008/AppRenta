@@ -44,7 +44,7 @@ exports.crearReserva = async (req, res) => {
             });
         }
 
-¡        await conexion.query(
+        await conexion.query(
             `INSERT INTO reservas
             (objeto_id, arrendatario_id, fecha_inicio, fecha_fin, estado, total)
             VALUES ($1,$2,$3,$4,'pendiente',0)`,
