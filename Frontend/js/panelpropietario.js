@@ -71,10 +71,52 @@ function cargarReservas() {
                     <strong>${r.titulo}</strong><br>
                     ${r.fecha_inicio} → ${r.fecha_fin}<br>
                     Estado: ${r.estado}
+
+                    <br><br>
+
+                    ${r.estado === "pendiente" ? `
+                        <button onclick="aprobar('${r.id}')">✔ Aprobar</button>
+                        <button onclick="rechazar('${r.id}')">✖ Rechazar</button>
+                    ` : ""}
                 </li>
             `;
 
             });
+
+        });
+
+}
+function aprobar(id) {
+    cambiarEstado(id, "aprobada");
+}
+
+function rechazar(id) {
+    cambiarEstado(id, "rechazada");
+}
+
+function cambiarEstado(id, estado) {
+
+    fetch("http://localhost:3000/api/reservas/estado", {
+
+        method: "PUT",
+
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: token
+        },
+
+        body: JSON.stringify({
+            reserva_id: id,
+            estado
+        })
+
+    })
+
+        .then(res => res.json())
+        .then(data => {
+
+            alert(data.mensaje);
+            cargarReservas();
 
         });
 

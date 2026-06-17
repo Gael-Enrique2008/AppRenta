@@ -28,4 +28,11 @@ router.get(
     controller.reservasPropietario
 );
 
+router.put(
+    "/reservas/estado",
+    auth.verificarToken,
+    role.verificarRol("propietario", "administrador"),
+    controller.cambiarEstadoReserva
+);
+
 module.exports = router;

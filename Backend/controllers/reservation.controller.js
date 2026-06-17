@@ -151,3 +151,48 @@ exports.reservasPropietario = async (req, res) => {
     }
 
 };
+
+exports.cambiarEstadoReserva = async (req, res) => {
+
+    try {
+
+        const { reserva_id, estado } = req.body;
+
+        const propietario_id = req.usuario.id;
+
+        const validacion = await conexion.query(
+            `SELECT r.*, o.propietario_id
+             FROM reservas r
+             JOIN objetos o ON r.objeto_id = o.id
+             WHERE r.id = $1`,
+            [reserva_id]
+        );
+
+        if (validacion.rows.length === 0) {
+            return res.status(404).json({ mensaje: "Reserva no existe" });
+        }
+
+        const reserva = validacion.rows[0];
+
+        if (reserva.propietario_id !== propietario_id) {
+            return res.status(403).json({ mensaje: "No autorizado" });
+        }
+
+        await conexion.query(
+            `UPDATE reservas
+             SET estado = $1
+             WHERE id = $2`,
+            [estado, reserva_id]
+        );
+
+        res.json({ mensaje: "Reserva actualizada" });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({ mensaje: "Error al actualizar reserva" });
+
+    }
+
+};
