@@ -81,7 +81,7 @@ function cargarReservas() {
 }
 
 function verDetalle(id) {
-    window.location.href = `ver-objeto.html?id=${id}`;
+    window.location.href = `verobjeto.html?id=${id}`;
 }
 function verDisponibilidad(id) {
     window.location.href = `disponibilidad.html?id=${id}`;
