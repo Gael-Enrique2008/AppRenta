@@ -96,3 +96,6 @@ function cerrarSesion() {
     window.location.href = "login.html";
 
 }
+function volver() {
+    window.location.href = "dashboard.html";
+}

@@ -86,3 +86,6 @@ function verDetalle(id) {
 function verDisponibilidad(id) {
     window.location.href = `disponibilidad.html?id=${id}`;
 }
+function volver() {
+    window.location.href = "dashboard.html";
+}
