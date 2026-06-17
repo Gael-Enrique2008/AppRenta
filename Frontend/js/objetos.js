@@ -64,7 +64,7 @@ function renderBotones(id) {
 
 function verObjeto(id) {
 
-    alert("Aquí después abrimos la tarjeta del objeto: " + id);
+    window.location.href = `verobjeto.html?id=${id}`;
 
 }
 
