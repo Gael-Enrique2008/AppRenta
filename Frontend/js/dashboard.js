@@ -9,6 +9,37 @@ if (!token) {
 document.getElementById("bienvenida").innerText =
     `Bienvenido ${nombre} (${rol})`;
 
+const menu = document.getElementById("menu");
+
+if (rol === "arrendatario") {
+
+    menu.innerHTML = `
+        <button onclick="irObjetos()">Ver objetos</button>
+        <button onclick="irMisRentas()">Mis rentas</button>
+    `;
+
+}
+
+else if (rol === "propietario") {
+
+    menu.innerHTML = `
+        <button onclick="irObjetos()">Ver objetos</button>
+        <button onclick="irPublicar()">Publicar objeto</button>
+        <button onclick="irPanelPropietario()">Mis reservas</button>
+    `;
+
+}
+
+else if (rol === "administrador") {
+
+    menu.innerHTML = `
+        <button onclick="irObjetos()">Ver objetos</button>
+        <button onclick="irPublicar()">Publicar objeto</button>
+        <button onclick="irPanelPropietario()">Panel propietario</button>
+    `;
+
+}
+
 function irObjetos() {
     window.location.href = "objetos.html";
 }
@@ -17,9 +48,15 @@ function irPublicar() {
     window.location.href = "crearobjeto.html";
 }
 
-function cerrarSesion() {
+function irMisRentas() {
+    window.location.href = "misrentas.html";
+}
 
+function irPanelPropietario() {
+    window.location.href = "panelpropietario.html";
+}
+
+function cerrarSesion() {
     localStorage.clear();
     window.location.href = "login.html";
-
 }
