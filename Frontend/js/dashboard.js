@@ -1,105 +1,25 @@
 ﻿const token = localStorage.getItem("token");
+const nombre = localStorage.getItem("nombre");
+const rol = localStorage.getItem("rol");
 
 if (!token) {
     window.location.href = "login.html";
 }
 
-function agregarTarea() {
+document.getElementById("bienvenida").innerText =
+    `Bienvenido ${nombre} (${rol})`;
 
-    const titulo = document.getElementById("titulo").value;
-
-    fetch("http://localhost:3000/api/tareas", {
-
-        method: "POST",
-
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": token
-        },
-
-        body: JSON.stringify({
-            titulo
-        })
-
-    })
-
-        .then(res => res.json())
-
-        .then(data => {
-
-            alert(data.mensaje);
-
-            document.getElementById("titulo").value = "";
-
-            cargarTareas();
-
-        });
+function irObjetos() {
+    window.location.href = "objetos.html";
 }
 
-function cargarTareas() {
-
-    fetch("http://localhost:3000/api/tareas", {
-
-        headers: {
-            "Authorization": token
-        }
-
-    })
-
-        .then(res => res.json())
-
-        .then(data => {
-
-            const lista = document.getElementById("listaTareas");
-
-            lista.innerHTML = "";
-
-            data.forEach(tarea => {
-
-                lista.innerHTML += `
-                <li>
-                    ${tarea.titulo}
-                     <button onclick="eliminarTarea(${tarea.id})">
-                        ❌
-                     </button>
-                </li>
-                `;
-
-            });
-
-        });
-
-}
-
-function eliminarTarea(id) {
-
-    const token = localStorage.getItem("token");
-
-    fetch(`http://localhost:3000/api/tareas/${id}`, {
-
-        method: "DELETE",
-
-        headers: {
-            Authorization: token
-        }
-
-    })
-
-        .then(res => res.json())
-        .then(data => {
-
-            cargarTareas();
-
-        });
-
+function irPublicar() {
+    window.location.href = "crear-objeto.html";
 }
 
 function cerrarSesion() {
 
-    localStorage.removeItem("token");
-
+    localStorage.clear();
     window.location.href = "login.html";
 
 }
-
-cargarTareas();

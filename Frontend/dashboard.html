@@ -2,28 +2,31 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestor de Tareas</title>
+    <title>Dashboard</title>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <div class="contenedor">
 
-        <h2>Mis tareas</h2>
+        <h2>Panel principal</h2>
+
+        <p id="bienvenida"></p>
+
+        <hr>
+
+        <button onclick="irObjetos()">
+            Ver objetos
+        </button>
+
+        <button onclick="irPublicar()">
+            Publicar objeto
+        </button>
 
         <button onclick="cerrarSesion()">
-            Cerrar sesion
+            Cerrar sesión
         </button>
-
-        <input type="text"
-               id="titulo"
-               placeholder="Escribe una tarea...">
-
-        <button onclick="agregarTarea()">
-            Agregar tarea
-        </button>
-
-        <ul id="listaTareas"></ul>
 
     </div>
 
