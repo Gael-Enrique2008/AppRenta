@@ -3,6 +3,7 @@ const router = express.Router();
 
 const controller = require("../controllers/reservation.controller");
 const auth = require("../middleware/auth.middleware");
+const role = require("../middleware/role.middleware");
 
 router.post(
     "/reservas",
