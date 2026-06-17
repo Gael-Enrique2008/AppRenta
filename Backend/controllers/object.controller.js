@@ -112,3 +112,28 @@ exports.eliminarObjeto = async (req, res) => {
     }
 
 };
+
+exports.misObjetos = async (req, res) => {
+
+    try {
+
+        const propietario_id = req.usuario.id;
+
+        const resultado = await conexion.query(
+            `SELECT * FROM objetos
+             WHERE propietario_id = $1
+             ORDER BY created_at DESC`,
+            [propietario_id]
+        );
+
+        res.json(resultado.rows);
+
+    } catch (error) {
+
+        res.status(500).json({
+            mensaje: "Error al obtener objetos del propietario"
+        });
+
+    }
+
+};

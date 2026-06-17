@@ -25,4 +25,11 @@ router.delete(
     controller.eliminarObjeto
 );
 
+router.get(
+    "/mis-objetos",
+    auth.verificarToken,
+    role.verificarRol("propietario", "administrador"),
+    controller.misObjetos
+);
+
 module.exports = router;

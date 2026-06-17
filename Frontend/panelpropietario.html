@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Panel propietario</title>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <div class="contenedor">
 
-        <h2>Panel propietario</h2>
+        <h2>Mis objetos publicados</h2>
 
-        <h3>Reservas de mis objetos</h3>
+        <p id="info"></p>
+
+        <ul id="listaObjetos"></ul>
+
+        <hr>
+
+        <h3>Reservas recibidas</h3>
 
         <ul id="listaReservas"></ul>
 
-        <a href="dashboard.html">Volver</a>
+        <button onclick="volver()">
+            Volver
+        </button>
 
     </div>
 
