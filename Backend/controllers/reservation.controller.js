@@ -157,22 +157,21 @@ exports.cambiarEstadoReserva = async (req, res) => {
     try {
 
         const { reserva_id, estado } = req.body;
-
         const propietario_id = req.usuario.id;
 
-        const validacion = await conexion.query(
-            `SELECT r.*, o.propietario_id
+        const result = await conexion.query(
+            `SELECT r.*, o.propietario_id, o.id AS objeto_id
              FROM reservas r
              JOIN objetos o ON r.objeto_id = o.id
              WHERE r.id = $1`,
             [reserva_id]
         );
 
-        if (validacion.rows.length === 0) {
+        if (result.rows.length === 0) {
             return res.status(404).json({ mensaje: "Reserva no existe" });
         }
 
-        const reserva = validacion.rows[0];
+        const reserva = result.rows[0];
 
         if (reserva.propietario_id !== propietario_id) {
             return res.status(403).json({ mensaje: "No autorizado" });
@@ -185,13 +184,31 @@ exports.cambiarEstadoReserva = async (req, res) => {
             [estado, reserva_id]
         );
 
-        res.json({ mensaje: "Reserva actualizada" });
+        if (estado === "aprobada") {
+
+            await conexion.query(
+                `INSERT INTO disponibilidad
+                (objeto_id, fecha_inicio, fecha_fin)
+                VALUES ($1,$2,$3)`,
+                [
+                    reserva.objeto_id,
+                    reserva.fecha_inicio,
+                    reserva.fecha_fin
+                ]
+            );
+        }
+
+        res.json({
+            mensaje: `Reserva ${estado}`
+        });
 
     } catch (error) {
 
         console.log(error);
 
-        res.status(500).json({ mensaje: "Error al actualizar reserva" });
+        res.status(500).json({
+            mensaje: "Error al actualizar reserva"
+        });
 
     }
 
