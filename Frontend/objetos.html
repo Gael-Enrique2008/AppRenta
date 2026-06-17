@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Objetos disponibles</title>
+    <title>Objetos</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -12,13 +12,13 @@
 
         <h2>Objetos disponibles</h2>
 
-        <button onclick="cerrarSesion()">
-            Cerrar sesión
-        </button>
+        <p id="infoUsuario"></p>
+
+        <button onclick="cerrarSesion()">Cerrar sesion</button>
 
         <hr>
 
-        <input type="text" id="busqueda" placeholder="Buscar objeto...">
+        <input type="text" id="busqueda" placeholder="Buscar...">
         <button onclick="cargarObjetos()">Buscar</button>
 
         <ul id="listaObjetos"></ul>
