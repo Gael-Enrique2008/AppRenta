@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Objetos disponibles</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="contenedor">
+
+        <h2>Objetos disponibles</h2>
+
+        <button onclick="cerrarSesion()">
+            Cerrar sesión
+        </button>
+
+        <hr>
+
+        <input type="text" id="busqueda" placeholder="Buscar objeto...">
+        <button onclick="cargarObjetos()">Buscar</button>
+
+        <ul id="listaObjetos"></ul>
+
+    </div>
+
+    <script src="js/objetos.js"></script>
+
+</body>
+</html>
