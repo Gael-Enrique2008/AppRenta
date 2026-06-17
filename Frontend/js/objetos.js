@@ -27,20 +27,21 @@ function cargarObjetos() {
             data.forEach(obj => {
 
                 lista.innerHTML += `
-                <li>
-                    <strong>${obj.titulo}</strong><br>
-                    ${obj.descripcion}<br>
-                    Día: $${obj.precio_dia}
+                    <div class="card">
+                    <strong>${obj.titulo}</strong>
+                    <p>${obj.descripcion}</p>
+
+                    <span class="badge">💰 Día: $${obj.precio_dia}</span>
 
                     <br><br>
 
                     <button onclick="verObjeto('${obj.id}')">
-                        Ver
+                        Ver detalle
                     </button>
 
                     ${renderBotones(obj.id)}
-                </li>
-            `;
+                </div>
+                `;
             });
 
         });

@@ -67,19 +67,20 @@ function cargarReservas() {
             data.forEach(r => {
 
                 lista.innerHTML += `
-                <li>
-                    <strong>${r.titulo}</strong><br>
-                    ${r.fecha_inicio} → ${r.fecha_fin}<br>
-                    Estado: ${r.estado}
+                    <div class="card">
+                        <strong>${r.titulo}</strong>
+                        <p>${r.fecha_inicio} → ${r.fecha_fin}</p>
 
-                    <br><br>
+                        <span class="badge">Estado: ${r.estado}</span>
 
-                    ${r.estado === "pendiente" ? `
-                        <button onclick="aprobar('${r.id}')">✔ Aprobar</button>
-                        <button onclick="rechazar('${r.id}')">✖ Rechazar</button>
-                    ` : ""}
-                </li>
-            `;
+                        <br><br>
+
+                        ${r.estado === "pendiente" ? `
+                            <button onclick="aprobar('${r.id}')">Aprobar</button>
+                            <button onclick="rechazar('${r.id}')">Rechazar</button>
+                        ` : ""}
+                    </div>
+                `;
 
             });
 
