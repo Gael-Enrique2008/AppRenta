@@ -2,29 +2,28 @@ const jwt = require("jsonwebtoken");
 
 exports.verificarToken = (req, res, next) => {
 
-    const token = req.headers.authorization;
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
+    if (!authHeader) {
         return res.status(401).json({
-            mensaje: "Acceso denegado"
+            mensaje: "No hay token"
         });
     }
 
     try {
 
-        const decoded = jwt.verify(
-            token,
-            process.env.JWT_SECRET
-        );
+        const token = authHeader.split(" ")[1] || authHeader;
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         req.usuario = decoded;
 
         next();
 
-    } catch {
+    } catch (error) {
 
         return res.status(401).json({
-            mensaje: "Token inválido"
+            mensaje: "Token inválido o expirado"
         });
 
     }
