@@ -14,7 +14,7 @@ function irObjetos() {
 }
 
 function irPublicar() {
-    window.location.href = "crear-objeto.html";
+    window.location.href = "crearobjeto.html";
 }
 
 function cerrarSesion() {

@@ -12,8 +12,16 @@ const conexion = new Pool({
 
     ssl: {
         rejectUnauthorized: false
-    }
+    },
 
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 15000
+
+});
+
+conexion.on("error", (err) => {
+    console.error("Error inesperado en PostgreSQL:", err);
 });
 
 module.exports = conexion;
