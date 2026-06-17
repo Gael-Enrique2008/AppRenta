@@ -12,6 +12,7 @@ app.use("/api", require("./routes/auth.routes"));
 app.use("/api", require("./routes/tareas.routes"));
 app.use("/api", require("./routes/object.routes"));
 app.use("/api", require("./routes/reservation.routes"));
+app.use("/api", require("./routes/disponibilidad.routes"));
 
 app.listen(3000, () => {
     console.log("Servidor corriendo en puerto 3000");
