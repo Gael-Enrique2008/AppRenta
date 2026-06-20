@@ -114,7 +114,7 @@ exports.crearOpinion = async (req, res) => {
         );
 
         res.json({
-            mensaje: "Opinión registrada"
+            mensaje: "Opinion registrada"
         });
 
     } catch (error) {
@@ -122,7 +122,7 @@ exports.crearOpinion = async (req, res) => {
         console.log(error);
 
         res.status(500).json({
-            mensaje: "Error al registrar opinión"
+            mensaje: "Error al registrar opinion"
         });
 
     }
@@ -153,7 +153,7 @@ exports.obtenerReputacion = async (req, res) => {
         console.log(error);
 
         res.status(500).json({
-            mensaje: "Error al obtener reputación"
+            mensaje: "Error al obtener reputacion"
         });
 
     }

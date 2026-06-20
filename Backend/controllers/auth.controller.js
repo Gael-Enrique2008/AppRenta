@@ -125,7 +125,7 @@ exports.login = async (req, res) => {
         console.log(error);
 
         res.status(500).json({
-            mensaje: "Error al iniciar sesión"
+            mensaje: "Error al iniciar sesion"
         });
 
     }
