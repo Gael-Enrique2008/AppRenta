@@ -12,7 +12,17 @@ document.addEventListener("DOMContentLoaded", cargarObjetos);
 
 function cargarObjetos() {
 
-    fetch("http://localhost:3000/api/objetos", {
+    const busqueda =
+        document.getElementById("busqueda").value;
+
+    const categoria =
+        document.getElementById("categoria").value;
+
+    const precio =
+        document.getElementById("precio").value;
+
+    fetch(`http://localhost:3000/api/objetos?busqueda=${busqueda}&categoria=${categoria}&precio=${precio}`,
+    {
         headers: {
             Authorization: token
         }
@@ -31,7 +41,7 @@ function cargarObjetos() {
                     <strong>${obj.titulo}</strong>
                     <p>${obj.descripcion}</p>
 
-                    <span class="badge">💰 Día: $${obj.precio_dia}</span>
+                    <span class="badge">Día: $${obj.precio_dia}</span>
 
                     <br><br>
 
@@ -99,4 +109,14 @@ function cerrarSesion() {
 }
 function volver() {
     window.location.href = "dashboard.html";
+}
+
+function limpiarFiltros() {
+
+    document.getElementById("busqueda").value = "";
+    document.getElementById("categoria").value = "";
+    document.getElementById("precio").value = "";
+
+    cargarObjetos();
+
 }

@@ -213,3 +213,62 @@ exports.cambiarEstadoReserva = async (req, res) => {
     }
 
 };
+
+exports.cancelarReserva = async (req, res) => {
+
+    try {
+
+        const reserva_id = req.params.id;
+        const usuario_id = req.usuario.id;
+
+        const resultado = await conexion.query(
+            `
+            SELECT *
+            FROM reservas
+            WHERE id = $1
+            `,
+            [reserva_id]
+        );
+
+        if (resultado.rows.length === 0) {
+
+            return res.status(404).json({
+                mensaje: "Reserva no encontrada"
+            });
+
+        }
+
+        const reserva = resultado.rows[0];
+
+        if (reserva.arrendatario_id !== usuario_id) {
+
+            return res.status(403).json({
+                mensaje: "No autorizado"
+            });
+
+        }
+
+        await conexion.query(
+            `
+            UPDATE reservas
+            SET estado = 'cancelada'
+            WHERE id = $1
+            `,
+            [reserva_id]
+        );
+
+        res.json({
+            mensaje: "Reserva cancelada"
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            mensaje: "Error al cancelar reserva"
+        });
+
+    }
+
+};

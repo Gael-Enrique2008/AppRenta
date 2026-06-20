@@ -10,6 +10,54 @@
 
     <div class="contenedor">
 
+        <h3>Buscar objetos</h3>
+
+        <input type="text"
+               id="busqueda"
+               placeholder="Buscar objeto">
+
+        <select id="categoria">
+
+            <option value="">Todas las categorías</option>
+
+            <option value="Herramientas">
+                Herramientas
+            </option>
+
+            <option value="Electrodomesticos">
+                Electrodomesticos
+            </option>
+
+            <option value="Jardin">
+                Jardin
+            </option>
+
+            <option value="Electrónica">
+                Electrónica
+            </option>
+
+            <option value="Vehículos">
+                Vehículos
+            </option>
+
+        </select>
+
+        <input type="number"
+               id="precio"
+               placeholder="Precio máximo">
+
+        <button onclick="cargarObjetos()">
+            Buscar
+        </button>
+
+        <hr>
+
+        <button onclick="limpiarFiltros()">
+            Mostrar todos
+        </button>
+
+        <hr>
+
         <h2>Objetos disponibles</h2>
 
         <p id="infoUsuario"></p>

@@ -36,4 +36,10 @@ router.put(
     controller.cambiarEstadoReserva
 );
 
+router.put(
+    "/cancelar-reserva/:id",
+    auth.verificarToken,
+    controller.cancelarReserva
+);
+
 module.exports = router;

@@ -59,17 +59,69 @@ exports.obtenerObjetos = async (req, res) => {
 
     try {
 
-        const sql = `
-            SELECT * FROM objetos
+        const {
+            busqueda,
+            categoria,
+            precio
+        } = req.query;
+
+        let sql = `
+            SELECT *
+            FROM objetos
             WHERE activo = true
-            ORDER BY created_at DESC
         `;
 
-        const resultado = await conexion.query(sql);
+        const valores = [];
+        let contador = 1;
+
+        // búsqueda por título o descripción
+        if (busqueda) {
+
+            sql += `
+                AND (
+                    titulo ILIKE $${contador}
+                    OR descripcion ILIKE $${contador}
+                )
+            `;
+
+            valores.push(`%${busqueda}%`);
+            contador++;
+
+        }
+
+        // categoría
+        if (categoria) {
+
+            sql += `
+                AND categoria = $${contador}
+            `;
+
+            valores.push(categoria);
+            contador++;
+
+        }
+
+        // precio máximo por día
+        if (precio) {
+
+            sql += `
+                AND precio_dia <= $${contador}
+            `;
+
+            valores.push(precio);
+            contador++;
+
+        }
+
+        sql += " ORDER BY created_at DESC";
+
+        const resultado = await conexion.query(sql, valores);
 
         res.json(resultado.rows);
 
     } catch (error) {
+
+        console.log(error);
 
         res.status(500).json({
             mensaje: "Error al obtener objetos"
