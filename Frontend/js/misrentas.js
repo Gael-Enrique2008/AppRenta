@@ -9,9 +9,11 @@ document.addEventListener("DOMContentLoaded", cargar);
 function cargar() {
 
     fetch("http://localhost:3000/api/mis-rentas", {
+
         headers: {
             Authorization: token
         }
+
     })
 
         .then(res => res.json())
@@ -24,6 +26,7 @@ function cargar() {
             data.forEach(r => {
 
                 lista.innerHTML += `
+
                 <li>
 
                     <strong>${r.titulo}</strong><br>
@@ -34,15 +37,28 @@ function cargar() {
 
                     <br><br>
 
-                    ${
-                        (r.estado === "pendiente" || r.estado === "aprobada")
-                        ? `<button onclick="cancelarReserva('${r.id}')">
+                    ${(r.estado === "pendiente" || r.estado === "aprobada")
+                        ? `
+                            <button onclick="cancelarReserva('${r.id}')">
                                 Cancelar reserva
-                           </button>`
+                            </button>
+                          `
+                        : ""
+                    }
+
+                    ${r.estado === "aprobada"
+                        ? `
+                            <button onclick="calificar('${r.id}')">
+                                Calificar experiencia
+                            </button>
+                          `
                         : ""
                     }
 
                 </li>
+
+                <hr>
+
             `;
 
             });
@@ -76,5 +92,17 @@ function cancelarReserva(id) {
             cargar();
 
         });
+
+}
+
+
+function calificar(id) {
+
+    localStorage.setItem(
+        "reservaSeleccionada",
+        id
+    );
+
+    window.location.href = "opinion.html";
 
 }

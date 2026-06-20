@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const opinionRoutes = require("./routes/opinion.routes");
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use("/api", require("./routes/tareas.routes"));
 app.use("/api", require("./routes/object.routes"));
 app.use("/api", require("./routes/reservation.routes"));
 app.use("/api", require("./routes/disponibilidad.routes"));
+app.use("/api", opinionRoutes);
 
 app.listen(3000, () => {
     console.log("Servidor corriendo en puerto 3000");
