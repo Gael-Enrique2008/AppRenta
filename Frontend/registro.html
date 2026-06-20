@@ -1,26 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Registro</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RentApp - Registro</title>
+
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 
     <div class="contenedor">
 
-        <h2>Registro</h2>
+        <div class="logo">
 
-        <input type="text"
-               id="nombre"
-               placeholder="Nombre completo">
+            <h1>RentApp</h1>
 
-        <input type="email"
-               id="correo"
-               placeholder="Correo">
+            <p>Plataforma de renta de objetos</p>
 
-        <input type="password"
-               id="password"
-               placeholder="Contraseña">
+        </div>
+
+        <hr>
+
+        <h2>Crear cuenta</h2>
+
+        <input
+            type="text"
+            id="nombre"
+            placeholder="Nombre completo">
+
+        <input
+            type="email"
+            id="correo"
+            placeholder="Correo electronico">
+
+        <input
+            type="password"
+            id="password"
+            placeholder="ContraseÃ±a">
 
         <select id="rol">
 
@@ -34,32 +53,45 @@
 
         </select>
 
-        <br>
+        <div class="legal">
 
-        <input type="checkbox" id="acepto">
+            <input
+                type="checkbox"
+                id="acepto">
 
-        <label for="acepto">
-            Acepto los
-            <a href="terminos.html" target="_blank">
-                Términos y Condiciones
+            <label for="acepto">
+
+                Acepto los
+
+                <a href="terminos.html" target="_blank">
+                    Terminos y Condiciones
+                </a>
+
+            </label>
+
+        </div>
+
+        <div class="legal-link">
+
+            <a href="aviso.html" target="_blank">
+                Ver Aviso de Privacidad
             </a>
-        </label>
 
-        <br><br>
-
-        <a href="aviso.html" target="_blank">
-            Ver Aviso de Privacidad
-        </a>
-
-        <br><br>
+        </div>
 
         <button onclick="registrar()">
             Registrarse
         </button>
 
-        <a href="login.html">
-            Ir al login
-        </a>
+        <div class="enlace">
+
+            <p>Â¿Ya tienes cuenta?</p>
+
+            <a href="login.html">
+                Iniciar sesion
+            </a>
+
+        </div>
 
     </div>
 

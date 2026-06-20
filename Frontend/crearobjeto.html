@@ -1,58 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
     <meta charset="UTF-8">
-    <title>Publicar objeto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RentApp - Publicar objeto</title>
 
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 
     <div class="contenedor">
 
-        <h2>Publicar objeto</h2>
+        <div class="logo">
 
-        <input type="text" id="titulo" placeholder="Titulo">
+            <h1>RentApp</h1>
 
-        <textarea id="descripcion" placeholder="Descripcion"></textarea>
+            <p>Publica un objeto para renta</p>
 
-        <select id="categoria">
+        </div>
 
-            <option value="Herramientas">
-                Herramientas
-            </option>
+        <hr>
 
-            <option value="Electrodomesticos">
-                Electrodomesticos
-            </option>
+        <h2>Nuevo objeto</h2>
 
-            <option value="Jardin">
-                Jardin
-            </option>
+        <div class="card">
 
-            <option value="Electronica">
-                Electronica
-            </option>
+            <input
+                type="text"
+                id="titulo"
+                placeholder="Titulo del objeto">
 
-            <option value="Vehiculos">
-                Vehiculos
-            </option>
+            <textarea
+                id="descripcion"
+                placeholder="Descripcion del objeto"></textarea>
 
-        </select>
+            <select id="categoria">
 
-        <textarea id="restricciones" placeholder="Restricciones"></textarea>
+                <option value="Herramientas">
+                    Herramientas
+                </option>
 
-        <input type="number" id="precio_dia" placeholder="Precio por dia">
+                <option value="Electrodomesticos">
+                    Electrodomesticos
+                </option>
 
-        <input type="number" id="precio_semana" placeholder="Precio por semana">
+                <option value="Jardin">
+                    Jardin
+                </option>
 
-        <input type="number" id="precio_mes" placeholder="Precio por mes">
+                <option value="Electronica">
+                    Electronica
+                </option>
+
+                <option value="Vehiculos">
+                    Vehiculos
+                </option>
+
+            </select>
+
+            <textarea
+                id="restricciones"
+                placeholder="Restricciones y condiciones de uso"></textarea>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Tarifas</h3>
+
+            <input
+                type="number"
+                id="precio_dia"
+                placeholder="Precio por dia">
+
+            <input
+                type="number"
+                id="precio_semana"
+                placeholder="Precio por semana">
+
+            <input
+                type="number"
+                id="precio_mes"
+                placeholder="Precio por mes">
+
+        </div>
 
         <button onclick="crearObjeto()">
             Publicar objeto
         </button>
 
-        <a href="objetos.html">Ver objetos</a>
+        <button onclick="window.location.href='objetos.html'">
+            Ver objetos
+        </button>
 
     </div>
 

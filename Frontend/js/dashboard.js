@@ -14,8 +14,35 @@ const menu = document.getElementById("menu");
 if (rol === "arrendatario") {
 
     menu.innerHTML = `
-        <button onclick="irObjetos()">Ver objetos</button>
-        <button onclick="irMisRentas()">Mis rentas</button>
+
+        <div class="card">
+
+            <h3>Objetos disponibles</h3>
+
+            <p>
+                Explora los objetos publicados por otros usuarios.
+            </p>
+
+            <button onclick="irObjetos()">
+                Ver objetos
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Mis rentas</h3>
+
+            <p>
+                Consulta el historial y estado de tus reservas.
+            </p>
+
+            <button onclick="irMisRentas()">
+                Ver mis rentas
+            </button>
+
+        </div>
+
     `;
 
 }
@@ -23,9 +50,49 @@ if (rol === "arrendatario") {
 else if (rol === "propietario") {
 
     menu.innerHTML = `
-        <button onclick="irObjetos()">Ver objetos</button>
-        <button onclick="irPublicar()">Publicar objeto</button>
-        <button onclick="irPanelPropietario()">Mis reservas</button>
+
+        <div class="card">
+
+            <h3>Objetos disponibles</h3>
+
+            <p>
+                Consulta los objetos publicados en la plataforma.
+            </p>
+
+            <button onclick="irObjetos()">
+                Ver objetos
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Publicar objeto</h3>
+
+            <p>
+                Agrega un nuevo objeto para ponerlo en renta.
+            </p>
+
+            <button onclick="irPublicar()">
+                Publicar
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Panel de propietario</h3>
+
+            <p>
+                Administra tus publicaciones y las reservas recibidas.
+            </p>
+
+            <button onclick="irPanelPropietario()">
+                Abrir panel
+            </button>
+
+        </div>
+
     `;
 
 }
@@ -33,9 +100,37 @@ else if (rol === "propietario") {
 else if (rol === "administrador") {
 
     menu.innerHTML = `
-        <button onclick="irObjetos()">Ver objetos</button>
-        <button onclick="irPublicar()">Publicar objeto</button>
-        <button onclick="irPanelPropietario()">Panel propietario</button>
+
+        <div class="card">
+
+            <h3>Objetos disponibles</h3>
+
+            <button onclick="irObjetos()">
+                Ver objetos
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Publicar objeto</h3>
+
+            <button onclick="irPublicar()">
+                Publicar
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Panel propietario</h3>
+
+            <button onclick="irPanelPropietario()">
+                Abrir panel
+            </button>
+
+        </div>
+
     `;
 
 }
@@ -57,6 +152,9 @@ function irPanelPropietario() {
 }
 
 function cerrarSesion() {
+
     localStorage.clear();
+
     window.location.href = "login.html";
+
 }

@@ -1,60 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
     <meta charset="UTF-8">
-    <title>Objetos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RentApp - Objetos</title>
 
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 
     <div class="contenedor">
 
-        <h3>Buscar objetos</h3>
+        <div class="logo">
 
-        <input type="text"
-               id="busqueda"
-               placeholder="Buscar objeto">
+            <h1>RentApp</h1>
 
-        <select id="categoria">
+            <p>Explora objetos disponibles para renta</p>
 
-            <option value="">Todas las categorías</option>
-
-            <option value="Herramientas">
-                Herramientas
-            </option>
-
-            <option value="Electrodomesticos">
-                Electrodomesticos
-            </option>
-
-            <option value="Jardin">
-                Jardin
-            </option>
-
-            <option value="Electrónica">
-                Electrónica
-            </option>
-
-            <option value="Vehículos">
-                Vehículos
-            </option>
-
-        </select>
-
-        <input type="number"
-               id="precio"
-               placeholder="Precio máximo">
-
-        <button onclick="cargarObjetos()">
-            Buscar
-        </button>
-
-        <hr>
-
-        <button onclick="limpiarFiltros()">
-            Mostrar todos
-        </button>
+        </div>
 
         <hr>
 
@@ -62,14 +28,63 @@
 
         <p id="infoUsuario"></p>
 
-        <button onclick="volver()">Volver</button>
+        <div class="card">
+
+            <h3>Buscar y filtrar</h3>
+
+            <input
+                type="text"
+                id="busqueda"
+                placeholder="Buscar objeto">
+
+            <select id="categoria">
+
+                <option value="">Todas las categorias</option>
+
+                <option value="Herramientas">
+                    Herramientas
+                </option>
+
+                <option value="Electrodomesticos">
+                    Electrodomesticos
+                </option>
+
+                <option value="Jardin">
+                    Jardin
+                </option>
+
+                <option value="Electronica">
+                    Electronica
+                </option>
+
+                <option value="Vehiculos">
+                    Vehiculos
+                </option>
+
+            </select>
+
+            <input
+                type="number"
+                id="precio"
+                placeholder="Precio maximo">
+
+            <button onclick="cargarObjetos()">
+                Buscar
+            </button>
+
+            <button onclick="limpiarFiltros()">
+                Mostrar todos
+            </button>
+
+        </div>
+
+        <button onclick="volver()">
+            Volver
+        </button>
 
         <hr>
 
-        <input type="text" id="busqueda" placeholder="Buscar...">
-        <button onclick="cargarObjetos()">Buscar</button>
-
-        <ul id="listaObjetos"></ul>
+        <div id="listaObjetos"></div>
 
     </div>
 

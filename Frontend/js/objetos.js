@@ -10,6 +10,7 @@ document.getElementById("infoUsuario").innerText =
 
 document.addEventListener("DOMContentLoaded", cargarObjetos);
 
+
 function cargarObjetos() {
 
     const busqueda =
@@ -21,65 +22,97 @@ function cargarObjetos() {
     const precio =
         document.getElementById("precio").value;
 
-    fetch(`http://localhost:3000/api/objetos?busqueda=${busqueda}&categoria=${categoria}&precio=${precio}`,
-    {
-        headers: {
-            Authorization: token
+
+    fetch(
+        `http://localhost:3000/api/objetos?busqueda=${busqueda}&categoria=${categoria}&precio=${precio}`,
+        {
+            headers: {
+                Authorization: token
+            }
         }
-    })
+    )
 
         .then(res => res.json())
         .then(data => {
 
             const lista = document.getElementById("listaObjetos");
+
             lista.innerHTML = "";
 
             data.forEach(obj => {
 
                 lista.innerHTML += `
-                    <div class="card">
-                    <strong>${obj.titulo}</strong>
+
+                <div class="card">
+
+                    <h3>${obj.titulo}</h3>
+
                     <p>${obj.descripcion}</p>
 
-                    <span class="badge">Día: $${obj.precio_dia}</span>
+                    <p>
+                        <strong>Categoría:</strong>
+                        ${obj.categoria}
+                    </p>
 
-                    <br><br>
+                    <p class="precio">
+                        $${obj.precio_dia} por día
+                    </p>
+
+                    <br>
 
                     <button onclick="verObjeto('${obj.id}')">
                         Ver detalle
                     </button>
 
-                    ${renderBotones(obj.id)}
+                    ${renderBotones(obj)}
+
                 </div>
-                `;
+
+            `;
+
             });
 
         });
 
 }
 
-function renderBotones(id) {
 
+function renderBotones(obj) {
+
+    // solo propietario y administrador ven el botón
     if (rol === "propietario" || rol === "administrador") {
 
         return `
-            <button onclick="eliminarObjeto('${id}')">
+
+            <button class="btn-rojo"
+                    onclick="eliminarObjeto('${obj.id}')">
+
                 Eliminar
+
             </button>
+
         `;
 
     }
+
     return "";
 
 }
 
+
 function verObjeto(id) {
 
-    window.location.href = `verobjeto.html?id=${id}`;
+    window.location.href =
+        `verobjeto.html?id=${id}`;
 
 }
 
+
 function eliminarObjeto(id) {
+
+    if (!confirm("¿Eliminar este objeto?")) {
+        return;
+    }
 
     fetch(`http://localhost:3000/api/objetos/${id}`, {
 
@@ -91,25 +124,17 @@ function eliminarObjeto(id) {
 
     })
 
-    .then(res => res.json())
-    .then(data => {
+        .then(res => res.json())
+        .then(data => {
 
-        alert(data.mensaje);
-        cargarObjetos();
+            alert(data.mensaje);
 
-    });
+            cargarObjetos();
 
-}
-
-function cerrarSesion() {
-
-    localStorage.clear();
-    window.location.href = "login.html";
+        });
 
 }
-function volver() {
-    window.location.href = "dashboard.html";
-}
+
 
 function limpiarFiltros() {
 
@@ -118,5 +143,21 @@ function limpiarFiltros() {
     document.getElementById("precio").value = "";
 
     cargarObjetos();
+
+}
+
+
+function volver() {
+
+    window.location.href = "dashboard.html";
+
+}
+
+
+function cerrarSesion() {
+
+    localStorage.clear();
+
+    window.location.href = "login.html";
 
 }

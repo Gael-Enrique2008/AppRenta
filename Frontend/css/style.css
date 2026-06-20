@@ -102,3 +102,42 @@ hr {
 .cancelada {
     background: #e5e7eb;
 }
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-rojo {
+    background: #dc2626;
+}
+
+.btn-rojo:hover {
+    background: #b91c1c;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.06);
+}
+
+.precio {
+    color: #059669;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    margin-right: 10px;
+    margin-top: 10px;
+}
