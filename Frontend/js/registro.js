@@ -8,7 +8,7 @@ function registrar() {
 
     if (!acepto) {
 
-        alert("Debes aceptar los términos y condiciones");
+        alert("Debes aceptar los terminos y condiciones");
 
         return;
 
