@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const opinionController = require("../controllers/opinion.controller");
-const verificarToken = require("../middleware/auth.middleware");
+const { verificarToken } = require("../middleware/auth.middleware");
 
 router.post(
     "/opinion",
